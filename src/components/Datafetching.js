@@ -6,7 +6,10 @@ const Datafetching = () => {
   const [posts, setPosts] = useState([])
   const [val, setVal] = useState('')
 
+const delay = 1;
+
   useEffect(( )=> {
+    const timeOutId = setTimeout(() =>
     axios.get(`http://hn.algolia.com/api/v1/search?query=${val}`)
       .then(res => {
         console.log(res);
@@ -15,7 +18,10 @@ const Datafetching = () => {
       .catch(err=> {
         console.log(err);
       })
+      ,1000);
+    return () => clearTimeout(timeOutId);
   }, [val])
+  
 
 
   return (
